@@ -2,6 +2,18 @@
 class AudioManager {
   constructor() {
     this.audioPlayer = document.getElementById('audio-player');
+    
+    // Si no existe el elemento audio, crearlo dinámicamente como fallback
+    if (!this.audioPlayer) {
+      console.log('Audio player element not found, creating it dynamically...');
+      this.audioPlayer = document.createElement('audio');
+      this.audioPlayer.id = 'audio-player';
+      this.audioPlayer.preload = 'none';
+      this.audioPlayer.hidden = true;
+      document.body.appendChild(this.audioPlayer);
+      console.log('Audio player element created successfully');
+    }
+    
     this.currentSound = null;
     this.isPlaying = false;
     this.volume = 0.7;
@@ -15,7 +27,7 @@ class AudioManager {
   
   setupAudioPlayer() {
     if (!this.audioPlayer) {
-      console.error('Audio player element not found');
+      console.error('Audio player element still not available after creation attempt');
       return;
     }
     
