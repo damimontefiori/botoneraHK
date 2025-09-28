@@ -213,9 +213,9 @@ class UIManager {
   }
   
   showLoading(show) {
-    const loadingState = document.getElementById('loading-state');
-    if (loadingState) {
-      loadingState.style.display = show ? 'block' : 'none';
+    const loadingIndicator = document.getElementById('loading-indicator');
+    if (loadingIndicator) {
+      loadingIndicator.style.display = show ? 'block' : 'none';
     }
   }
   
