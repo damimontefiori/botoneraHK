@@ -31,6 +31,13 @@ class HollowKnightSoundboardApp {
       // Show initial loading state
       this.showLoadingScreen();
       
+      // Validate required data
+      if (!window.SOUNDS_DATA || !window.CATEGORIES || !window.getRandomEmoji) {
+        throw new Error('Datos de sonidos no disponibles. Verifique la conexión.');
+      }
+      
+      console.log(`📊 ${window.SOUNDS_DATA.length} sonidos cargados`);
+      
       // Initialize managers in sequence
       await this.initializeManagers();
       

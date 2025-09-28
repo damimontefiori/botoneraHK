@@ -813,4 +813,30 @@ const SOUNDS_DATA = [
   }
 ];
 
-export { SOUNDS_DATA };
+// Categorías para filtros
+const CATEGORIES = {
+  all: "Todos",
+  hornet: "Hornet", 
+  grub: "Grub",
+  dung_defender: "Dung Defender",
+  ghost: "Ghost",
+  grimm: "Grimm",
+  silksong: "Silksong",
+  others: "Otros"
+};
+
+// Emojis aleatorios para botones
+const BUTTON_EMOJIS = [
+  '🎵', '🔊', '🎶', '🎯', '🎮', '🕷️', '⚔️', '🌟', 
+  '✨', '🎭', '🦋', '👻', '🐛', '💀', '⚡', '🔥',
+  '💎', '🗡️', '🛡️', '🏆', '🎪', '🌙', '💜', '🖤'
+];
+
+function getRandomEmoji() {
+  return BUTTON_EMOJIS[Math.floor(Math.random() * BUTTON_EMOJIS.length)];
+}
+
+// Hacer las constantes disponibles globalmente
+window.SOUNDS_DATA = SOUNDS_DATA;
+window.CATEGORIES = CATEGORIES;
+window.getRandomEmoji = getRandomEmoji;
