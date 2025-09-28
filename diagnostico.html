@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico PWA - Botonera Hollow Knight</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #2a2a2a;
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid #444;
+        }
+        h1 {
+            color: #00ff88;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .test-section {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #333;
+            border-radius: 0.5rem;
+            border-left: 4px solid #00ff88;
+        }
+        .result {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            font-family: monospace;
+        }
+        .success { background: #1b4332; color: #40916c; }
+        .error { background: #660708; color: #e85d75; }
+        .warning { background: #7d4f00; color: #ffb700; }
+        .info { background: #003566; color: #0077b6; }
+        button {
+            background: #00ff88;
+            color: #1a1a1a;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 0.5rem;
+        }
+        button:hover {
+            background: #00cc6a;
+        }
+        #console-output {
+            background: #111;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Diagnóstico PWA</h1>
+        
+        <div class="test-section">
+            <h3>📁 Carga de Scripts</h3>
+            <div id="scripts-test"></div>
+            <button onclick="testScripts()">Probar Scripts</button>
+        </div>
+
+        <div class="test-section">
+            <h3>🎵 Datos de Sonidos</h3>
+            <div id="sounds-test"></div>
+            <button onclick="testSounds()">Probar Sonidos</button>
+        </div>
+
+        <div class="test-section">
+            <h3>🌐 Conectividad R2</h3>
+            <div id="r2-test"></div>
+            <button onclick="testR2()">Probar R2</button>
+        </div>
+
+        <div class="test-section">
+            <h3>📱 PWA Features</h3>
+            <div id="pwa-test"></div>
+            <button onclick="testPWA()">Probar PWA</button>
+        </div>
+
+        <div class="test-section">
+            <h3>🖥️ Console Output</h3>
+            <div id="console-output"></div>
+            <button onclick="clearConsole()">Limpiar</button>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <button onclick="runAllTests()" style="background: #ff6b35; font-size: 1.1rem;">
+                🚀 Ejecutar Todos los Tests
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let consoleDiv = document.getElementById('console-output');
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${message}`;
+            
+            const colors = {
+                info: '#0077b6',
+                success: '#40916c', 
+                error: '#e85d75',
+                warning: '#ffb700'
+            };
+            
+            consoleDiv.innerHTML += `<div style="color: ${colors[type]}">${logEntry}</div>`;
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+            
+            console.log(message);
+        }
+        
+        function showResult(containerId, message, success) {
+            const container = document.getElementById(containerId);
+            const className = success ? 'success' : 'error';
+            container.innerHTML += `<div class="result ${className}">${success ? '✅' : '❌'} ${message}</div>`;
+        }
+        
+        function testScripts() {
+            const container = document.getElementById('scripts-test');
+            container.innerHTML = '';
+            log('Probando carga de scripts...', 'info');
+            
+            const requiredScripts = [
+                'sounds-data-r2.js',
+                'audio-manager.js', 
+                'ui-manager.js',
+                'pwa-manager.js',
+                'app.js'
+            ];
+            
+            requiredScripts.forEach(script => {
+                const scriptEl = document.querySelector(`script[src*="${script}"]`);
+                showResult('scripts-test', `Script ${script}`, !!scriptEl);
+            });
+        }
+        
+        function testSounds() {
+            const container = document.getElementById('sounds-test');
+            container.innerHTML = '';
+            log('Probando datos de sonidos...', 'info');
+            
+            try {
+                showResult('sounds-test', `SOUNDS_DATA existe`, !!window.SOUNDS_DATA);
+                showResult('sounds-test', `CATEGORIES existe`, !!window.CATEGORIES);
+                showResult('sounds-test', `getRandomEmoji existe`, !!window.getRandomEmoji);
+                
+                if (window.SOUNDS_DATA) {
+                    showResult('sounds-test', `${window.SOUNDS_DATA.length} sonidos cargados`, true);
+                    log(`Sonidos encontrados: ${window.SOUNDS_DATA.length}`, 'success');
+                }
+                
+            } catch (error) {
+                showResult('sounds-test', `Error: ${error.message}`, false);
+                log(`Error en datos de sonidos: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testR2() {
+            const container = document.getElementById('r2-test');
+            container.innerHTML = '';
+            log('Probando conectividad con Cloudflare R2...', 'info');
+            
+            const testUrl = 'https://pub-c3a9e0bba47845faa667d8d09f551770.r2.dev/audio/Hornet_GIT_GUD.mp3';
+            
+            try {
+                const response = await fetch(testUrl, { method: 'HEAD' });
+                showResult('r2-test', `Conectividad R2 (${response.status})`, response.ok);
+                log(`R2 Response: ${response.status} ${response.statusText}`, response.ok ? 'success' : 'error');
+                
+            } catch (error) {
+                showResult('r2-test', `Error de red: ${error.message}`, false);
+                log(`Error R2: ${error.message}`, 'error');
+            }
+        }
+        
+        function testPWA() {
+            const container = document.getElementById('pwa-test');
+            container.innerHTML = '';
+            log('Probando características PWA...', 'info');
+            
+            showResult('pwa-test', 'Service Worker', 'serviceWorker' in navigator);
+            showResult('pwa-test', 'Web App Manifest', !!document.querySelector('link[rel="manifest"]'));
+            showResult('pwa-test', 'HTTPS', location.protocol === 'https:');
+            showResult('pwa-test', 'Local Storage', !!window.localStorage);
+            
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistration().then(registration => {
+                    showResult('pwa-test', 'SW Registrado', !!registration);
+                    log(`Service Worker: ${registration ? 'Activo' : 'No registrado'}`, 
+                        registration ? 'success' : 'warning');
+                });
+            }
+        }
+        
+        async function runAllTests() {
+            log('🚀 Iniciando diagnóstico completo...', 'info');
+            
+            testScripts();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            testSounds();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            await testR2();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            testPWA();
+            
+            log('✅ Diagnóstico completado', 'success');
+        }
+        
+        function clearConsole() {
+            consoleDiv.innerHTML = '';
+        }
+        
+        // Capturar errores de JavaScript
+        window.addEventListener('error', function(e) {
+            log(`❌ Error JS: ${e.message} (${e.filename}:${e.lineno})`, 'error');
+        });
+        
+        // Auto-ejecutar al cargar
+        window.addEventListener('load', function() {
+            log('🔧 Diagnóstico PWA cargado', 'success');
+        });
+    </script>
+</body>
+</html>
