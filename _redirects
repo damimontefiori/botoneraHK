@@ -1,0 +1,22 @@
+# Netlify Redirects Configuration for Hollow Knight Soundboard PWA
+
+# SPA fallback - todas las rutas que no corresponden a archivos estáticos
+# deben servir index.html para el enrutamiento del lado del cliente
+/*    /index.html   200
+
+# Redirección específica para compatibilidad con Service Workers
+/sw.js    /sw.js    200    
+/manifest.json    /manifest.json    200
+
+# Asegurar que los archivos de audio se sirvan correctamente
+/audio/*    /audio/:splat    200
+
+# Redirecciones para iconos PWA
+/favicon.ico    /assets/favicon.ico    200
+/apple-touch-icon.png    /assets/apple-touch-icon.png    200
+
+# Redirección para robots.txt (opcional)
+/robots.txt    /robots.txt    200
+
+# Manejo de errores 404 - mostrar la PWA
+/404    /index.html    200

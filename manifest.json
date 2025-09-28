@@ -1,0 +1,109 @@
+{
+  "name": "Hollow Knight Soundboard",
+  "short_name": "HK Sounds",
+  "description": "Botonera de sonidos épicos de Hollow Knight - ¡Reproduce tus sonidos favoritos del juego!",
+  "version": "1.0.0",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0f172a",
+  "background_color": "#1e293b",
+  "scope": "./",
+  
+  "icons": [
+    {
+      "src": "./assets/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "./assets/icon-96x96.png", 
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "./assets/icon-128x128.png",
+      "sizes": "128x128", 
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "./assets/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "./assets/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "./assets/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png", 
+      "purpose": "maskable any"
+    },
+    {
+      "src": "./assets/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "./assets/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  
+  "categories": ["games", "entertainment", "music"],
+  
+  "screenshots": [
+    {
+      "src": "./assets/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Botonera principal con todos los sonidos"
+    },
+    {
+      "src": "./assets/screenshot-narrow.png", 
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Vista móvil de la botonera"
+    }
+  ],
+
+  "shortcuts": [
+    {
+      "name": "Sonidos de Hornet",
+      "short_name": "Hornet",
+      "description": "Acceso rápido a sonidos de Hornet",
+      "url": "./index.html?filter=hornet",
+      "icons": [
+        {
+          "src": "./assets/shortcut-hornet.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Sonidos de Grub", 
+      "short_name": "Grub",
+      "description": "Acceso rápido a sonidos de Grub",
+      "url": "./index.html?filter=grub",
+      "icons": [
+        {
+          "src": "./assets/shortcut-grub.png",
+          "sizes": "96x96" 
+        }
+      ]
+    }
+  ]
+}

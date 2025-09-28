@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Archivos específicos para crawlers
+Sitemap: https://your-site.netlify.app/sitemap.xml
+
+# Evitar indexar archivos de configuración
+Disallow: /_headers
+Disallow: /_redirects
+Disallow: /netlify.toml
+Disallow: /*.py
+Disallow: /*.sh
+Disallow: /*.ps1
+Disallow: /*.json$
+Allow: /manifest.json
+
+# Permitir acceso a archivos PWA importantes
+Allow: /sw.js
+Allow: /manifest.json
+Allow: /assets/
+Allow: /audio/

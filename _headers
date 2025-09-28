@@ -1,0 +1,56 @@
+# Netlify Headers Configuration for Hollow Knight Soundboard PWA
+
+/*
+  # Configuración CORS para todos los recursos
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, POST, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Authorization
+  
+  # Configuración de cache
+  Cache-Control: public, max-age=31536000, immutable
+
+# Configuración específica para archivos HTML
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Configuración para el Service Worker
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+  
+# Configuración para el manifest
+/manifest.json
+  Cache-Control: public, max-age=86400
+  Content-Type: application/manifest+json
+
+# Configuración para archivos de audio
+/audio/*
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: audio/mpeg
+  Cross-Origin-Resource-Policy: cross-origin
+  Access-Control-Allow-Origin: *
+
+# Configuración para archivos JavaScript
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: application/javascript
+
+# Configuración para archivos CSS
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: text/css
+
+# Configuración para iconos
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Headers PWA específicos
+/*
+  # Seguridad
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  
+  # PWA features
+  Cross-Origin-Embedder-Policy: unsafe-none
+  Cross-Origin-Opener-Policy: same-origin

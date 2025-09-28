@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botonera Hollow Knight - Sonidos del Juego</title>
+    <meta name="description" content="Botonera de sonidos de Hollow Knight - Escucha y comparte los mejores sonidos del juego">
+    <meta name="keywords" content="Hollow Knight, sonidos, juego, Team Cherry, indie">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#1a1a1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Botonera HK">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/icon-48x48.png">
+    <link rel="icon" type="image/png" sizes="72x72" href="/assets/icon-72x72.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/assets/icon-96x96.png">
+    <link rel="icon" type="image/png" sizes="144x144" href="/assets/icon-144x144.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="/assets/icon-256x256.png">
+    <link rel="icon" type="image/png" sizes="384x384" href="/assets/icon-384x384.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/icon-512x512.png">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="96x96" href="/assets/icon-96x96.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/assets/icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="/assets/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="256x256" href="/assets/icon-256x256.png">
+    <link rel="apple-touch-icon" sizes="384x384" href="/assets/icon-384x384.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/assets/icon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="app-title">🎮 Botonera Hollow Knight</h1>
+                <p class="app-subtitle">Los mejores sonidos del juego más épico</p>
+            </div>
+            <div class="header-controls">
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="🔍 Buscar sonidos..." class="search-input">
+                </div>
+                <div class="filter-container">
+                    <select id="category-filter" class="category-filter">
+                        <option value="">📁 Todas las categorías</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="sounds-grid" id="sounds-grid">
+                <!-- Los botones de sonidos se generarán aquí dinámicamente -->
+            </div>
+            
+            <div class="loading-indicator" id="loading-indicator">
+                <div class="spinner"></div>
+                <p>Cargando sonidos...</p>
+            </div>
+            
+            <div class="empty-state" id="empty-state" style="display: none;">
+                <div class="empty-icon">🔍</div>
+                <h3>No se encontraron sonidos</h3>
+                <p>Prueba con otros términos de búsqueda o cambia la categoría</p>
+            </div>
+        </main>
+
+        <!-- Toast Container -->
+        <div id="toast-container" class="toast-container"></div>
+        
+        <!-- PWA Install Banner -->
+        <div id="install-banner" class="install-banner" style="display: none;">
+            <div class="install-content">
+                <span class="install-icon">📱</span>
+                <div class="install-text">
+                    <strong>¡Instala la app!</strong>
+                    <span>Acceso rápido desde tu pantalla de inicio</span>
+                </div>
+                <button id="install-button" class="install-button">Instalar</button>
+                <button id="dismiss-banner" class="dismiss-button">×</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/sounds-data-r2.js"></script>
+    <script src="/js/audio-manager.js"></script>
+    <script src="/js/ui-manager.js"></script>
+    <script src="/js/pwa-manager.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>
