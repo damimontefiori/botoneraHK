@@ -1,0 +1,40 @@
+{
+  "name": "botonera-hollow-knight",
+  "version": "1.0.0",
+  "description": "PWA con sonidos de Hollow Knight - Botonera interactiva para gamers",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 8000",
+    "build": "echo 'No build process needed - static PWA'",
+    "deploy": "echo 'Deploy handled by Netlify'"
+  },
+  "keywords": [
+    "hollow-knight",
+    "pwa",
+    "soundboard",
+    "progressive-web-app",
+    "gaming",
+    "sounds"
+  ],
+  "author": "Damián Montefiori",
+  "license": "MIT",
+  "homepage": "https://github.com/damimontefiori/botoneraHK#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/damimontefiori/botoneraHK.git"
+  },
+  "bugs": {
+    "url": "https://github.com/damimontefiori/botoneraHK/issues"
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "not dead"
+  ]
+}
