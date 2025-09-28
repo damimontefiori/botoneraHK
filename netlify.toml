@@ -1,51 +1,76 @@
-# Configuración de build para Netlify
+# Configuración de build para Netlify - Botonera Hollow Knight PWA
 [build]
-  # Directorio de publicación (donde están los archivos finales)
+  # Sitio estático - directorio raíz
   publish = "."
   
-  # Comando de build (no necesario para archivos estáticos, pero útil para futuras mejoras)
-  command = "echo 'Static site - no build needed'"
+  # No necesita build command para archivos estáticos
+  command = ""
 
-[build.environment]
-  # Variables de entorno para el build
-  NODE_VERSION = "18"
-
-# Configuración de funciones (por si se necesitan en el futuro)
-[functions]
-  directory = "functions"
-
-# Configuración PWA específica
+# Headers optimizados para PWA
 [[headers]]
+  # Service Worker - sin cache para actualizaciones
   for = "/sw.js"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
 
 [[headers]]
+  # Manifest PWA
   for = "/manifest.json"
   [headers.values]
     Content-Type = "application/manifest+json"
+    Cache-Control = "public, max-age=86400"
 
 [[headers]]
-  for = "/audio/*"
+  # Archivos JavaScript
+  for = "/*.js"
+  [headers.values]
+    Content-Type = "application/javascript"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  # Archivos CSS
+  for = "/*.css" 
+  [headers.values]
+    Content-Type = "text/css"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  # Assets (iconos, favicons)
+  for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "audio/mpeg"
 
-# Configuración de Forms (por si se necesita feedback en el futuro)
-[build.processing]
-  skip_processing = false
-[build.processing.css]
-  bundle = true
-  minify = true
-[build.processing.js]
-  bundle = true
-  minify = true
-[build.processing.html]
-  pretty_urls = true
+[[headers]]
+  # HTML files - siempre fresh
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
 
-# Configuración de plugins
-[[plugins]]
-  package = "netlify-plugin-pwa"
-  
-  [plugins.inputs]
-    distDir = "."
+[[headers]]
+  # Headers de seguridad para toda la app
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Embedder-Policy = "unsafe-none"
+
+# Redirects para SPA behavior y PWA
+[[redirects]]
+  # SPA fallback - todas las rutas van a index.html
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Redirects para archivos específicos
+[[redirects]]
+  from = "/favicon.ico"
+  to = "/assets/favicon.ico"
+  status = 200
+
+[[redirects]]
+  from = "/apple-touch-icon.png"
+  to = "/assets/apple-touch-icon.png"
+  status = 200
